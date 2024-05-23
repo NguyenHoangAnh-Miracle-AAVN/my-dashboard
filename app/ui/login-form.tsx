@@ -10,6 +10,7 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus} from 'react-dom';
 import { authenticate } from '@/app/lib/action';
+import { SignInWitchKeycloak } from './sign-in';
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -61,6 +62,7 @@ export default function LoginForm() {
           </div>
         </div>
         <LoginButton />
+        <SignInWitchKeycloak/>
         <div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
           {errorMessage && (
             <ExclamationCircleIcon className="h-5 w-5 text-red-500">
