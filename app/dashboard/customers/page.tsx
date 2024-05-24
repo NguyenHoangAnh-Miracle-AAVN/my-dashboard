@@ -1,13 +1,15 @@
-import Table from "@/app/ui/customers/table";
-import { lusitana } from "@/app/ui/fonts";
-import { Suspense } from "react";
-import { fetchCustomerPages, fetchCustomers, fetchFilteredCustomers } from '@/app/lib/data';
-import { FormattedCustomersTable } from "@/app/lib/definitions";
-import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
-import Search from "@/app/ui/search";
+import { fetchCustomerPages, fetchFilteredCustomers } from '@/app/lib/data';
 import { CreateButton } from "@/app/ui/buttons";
+import CreatedCount from '@/app/ui/customers/created-count';
+import Table from "@/app/ui/customers/table";
+import ToastNotifier from '@/app/ui/customers/toast-notifier';
+import { lusitana } from "@/app/ui/fonts";
 import Pagination from "@/app/ui/pagination";
-
+import Search from "@/app/ui/search";
+import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
+import { Suspense } from "react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default async function Page({searchParams}: {searchParams?: {query?: string; page?: string;};}) {
     const query = searchParams?.query || '';
@@ -19,6 +21,9 @@ export default async function Page({searchParams}: {searchParams?: {query?: stri
         <div className="w-full">
             <div className="flex w-full items-center justify-between">
                 <h1 className={`${lusitana.className} text-2xl`}>Customers</h1>
+                <ToastContainer/>
+                <CreatedCount/>
+                <ToastNotifier/>
             </div>
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                 <Search placeholder="Search customers..." />

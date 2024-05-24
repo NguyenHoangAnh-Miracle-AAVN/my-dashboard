@@ -1,4 +1,5 @@
 'use server';
+import 'server-only';
 import { z } from 'zod';
 import {sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';

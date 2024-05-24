@@ -13,6 +13,9 @@ import {
 import { Button } from '@/app/ui/button';
 import {createCustomer} from '@/app/lib/action';
 import { useFormState } from 'react-dom';
+import { useDispatch } from 'react-redux';
+import { increment } from '@/app/lib/redux/action';
+import { showToast } from '@/app/lib/redux/toastAction';
 
 
 export default function Form() {
@@ -23,10 +26,15 @@ export default function Form() {
   }
 
   const [state, dispatch] = useFormState(createCustomer, initialState);
-
+  const reduxDispatch = useDispatch();
   console.log(state);
+  const handleClick = (formData:FormData) => {
+    dispatch(formData);
+    reduxDispatch(increment());
+    reduxDispatch(showToast('Customer created successfully', 'success'));
+  }
   return (
-    <form action={dispatch}>
+    <form action={handleClick}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
